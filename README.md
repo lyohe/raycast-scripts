@@ -4,10 +4,13 @@
 
 ## 使い方
 
-```
+```bash
 git clone git@github.com:lyohe/raycast-scripts.git
 
 cd raycast-scripts
+
+# Python スクリプトを使用する場合は依存パッケージをインストール
+pip install -r scripts/requirements.txt
 ```
 
 Raycast の Settings から Script を格納するディレクトリとして `./scripts` を追加する。
@@ -27,6 +30,9 @@ YouTube動画IDのような11文字のランダムIDを生成します。使用�
 
 ### 💬 Random Topic
 ランダムな会話トピックを選択します。`data/random-topic.txt`からトピックを読み込んでクリップボードに出力します。
+
+### 📄 URL to Markdown Converter
+クリップボードにコピーしたURLのWebページをMarkdown形式に変換します。LLMへの入力用に最適化された形式で出力します。
 
 ## 注意点
 

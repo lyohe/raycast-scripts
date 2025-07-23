@@ -26,11 +26,10 @@ try:
     from bs4 import BeautifulSoup
     import html2text
 except ImportError:
-    print("Installing required packages...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--quiet", "requests", "beautifulsoup4", "html2text"])
-    import requests
-    from bs4 import BeautifulSoup
-    import html2text
+    print("Error: Required packages are not installed.", file=sys.stderr)
+    print("Please run: pip install -r scripts/requirements.txt", file=sys.stderr)
+    print("Or: pip install requests beautifulsoup4 html2text", file=sys.stderr)
+    sys.exit(1)
 
 def get_clipboard_content():
     """Get content from clipboard"""
