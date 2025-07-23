@@ -70,7 +70,7 @@ def post_process_markdown(markdown):
     
     # Fix excessive underscore escaping
     # Replace escaped underscores with regular underscores
-    markdown = markdown.replace(r'\_', '_')
+    markdown = markdown.replace('\_', '_')
     
     # Remove standalone numbers or special characters (likely from icons)
     markdown = re.sub(r'^[\s]*\d{1,3}[\s]*$', '', markdown, flags=re.MULTILINE)
