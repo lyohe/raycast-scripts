@@ -147,7 +147,7 @@ def url_to_markdown(url):
             markdown = h.handle(str(main_content))
         except Exception as e:
             # Fallback: try with simpler approach
-            markdown = h.handle(main_content.get_text())
+            markdown = h.handle(str(main_content))
         
         # Post-process the markdown
         markdown = post_process_markdown(markdown)
