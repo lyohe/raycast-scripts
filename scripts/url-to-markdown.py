@@ -45,7 +45,10 @@ def is_valid_url(string):
     try:
         result = urlparse(string)
         return all([result.scheme, result.netloc])
-    except:
+    except (ValueError, TypeError, AttributeError):
+        # ValueError: Invalid URL format
+        # TypeError: Input is not a string
+        # AttributeError: Input lacks required attributes
         return False
 
 def post_process_markdown(markdown):
