@@ -88,7 +88,7 @@ let amazonAsinRegexes: [NSRegularExpression] = amazonAsinPatterns.compactMap {
   do {
     return try NSRegularExpression(pattern: $0, options: [.caseInsensitive])
   } catch {
-    fputs("Warning: Failed to compile Amazon ASIN regex pattern '\($0)': \(error)\n", stderr)
+    fputs("Warning: Failed to compile Amazon ASIN regex pattern \(String(reflecting: $0)): \(error)\n", stderr)
     return nil
   }
 }
@@ -112,7 +112,7 @@ func normalizeInput(_ input: String) -> String? {
     return trimmed
   }
 
-  let range = trimmed.range(of: #"(?i)^[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z]{2,}"#, options: .regularExpression)
+  let range = trimmed.range(of: #"^[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z]{2,}"#, options: .regularExpression)
   if range != nil {
     return "https://\(trimmed)"
   }
