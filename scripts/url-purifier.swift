@@ -84,6 +84,15 @@ let amazonAsinPatterns = [
   "/ASIN/([A-Z0-9]{10})",
 ]
 
+let amazonAsinRegexes: [NSRegularExpression] = amazonAsinPatterns.compactMap {
+  do {
+    return try NSRegularExpression(pattern: $0, options: [.caseInsensitive])
+  } catch {
+    fputs("Warning: Failed to compile Amazon ASIN regex pattern \(String(reflecting: $0)): \(error)\n", stderr)
+    return nil
+  }
+}
+
 func getClipboardContent() -> String? {
   NSPasteboard.general.string(forType: .string)?.trimmingCharacters(in: .whitespacesAndNewlines)
 }
@@ -103,7 +112,7 @@ func normalizeInput(_ input: String) -> String? {
     return trimmed
   }
 
-  let range = trimmed.range(of: #"\.[a-z]{2,}"#, options: .regularExpression)
+  let range = trimmed.range(of: #"^[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z]{2,}"#, options: .regularExpression)
   if range != nil {
     return "https://\(trimmed)"
   }
@@ -126,7 +135,7 @@ func isTrackingParam(_ key: String) -> Bool {
   if lower.hasSuffix("clid") || lower.hasSuffix("clkid") {
     return true
   }
-  if lower.hasPrefix("ref_") || lower.hasPrefix("referrer") || lower.hasPrefix("referral") {
+  if lower.hasPrefix("ref_") {
     return true
   }
   for prefix in trackingPrefixes where lower.hasPrefix(prefix) {
@@ -135,8 +144,8 @@ func isTrackingParam(_ key: String) -> Bool {
   return false
 }
 
-func filteredQueryItems(_ items: [URLQueryItem]) -> [URLQueryItem] {
-  items.filter { !isTrackingParam($0.name) }
+func filteredQueryItems(_ queryItems: [URLQueryItem]) -> [URLQueryItem] {
+  queryItems.filter { !isTrackingParam($0.name) }
 }
 
 func normalizedAmazonHost(_ host: String) -> String {
@@ -144,6 +153,7 @@ func normalizedAmazonHost(_ host: String) -> String {
   for prefix in ["www.", "m.", "smile."] {
     if result.hasPrefix(prefix) {
       result.removeFirst(prefix.count)
+      break
     }
   }
   return result
@@ -155,13 +165,11 @@ func isAmazonDomain(_ host: String) -> Bool {
 }
 
 func extractAmazonASIN(from path: String) -> String? {
-  for pattern in amazonAsinPatterns {
-    if let regex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) {
-      let range = NSRange(path.startIndex..<path.endIndex, in: path)
-      if let match = regex.firstMatch(in: path, options: [], range: range),
-         let matchRange = Range(match.range(at: 1), in: path) {
-        return path[matchRange].uppercased()
-      }
+  for regex in amazonAsinRegexes {
+    let range = NSRange(path.startIndex..<path.endIndex, in: path)
+    if let match = regex.firstMatch(in: path, options: [], range: range),
+       let matchRange = Range(match.range(at: 1), in: path) {
+      return path[matchRange].uppercased()
     }
   }
   return nil
@@ -251,7 +259,7 @@ let rawInput = argumentInput.isEmpty ? (getClipboardContent() ?? "") : argumentI
 
 guard let normalized = normalizeInput(rawInput),
       isValidURL(URLComponents(string: normalized)) else {
-  fputs("Error: Invalid URL input: '\(rawInput)'\n", stderr)
+  fputs("Error: Invalid URL input: \(String(reflecting: rawInput))\n", stderr)
   exit(1)
 }
 
