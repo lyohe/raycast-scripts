@@ -31,6 +31,9 @@ YouTube動画IDのような11文字のランダムIDを生成します。使用�
 ### 💬 Random Topic
 ランダムな会話トピックを選択します。`data/random-topic.txt`からトピックを読み込んでクリップボードに出力します。
 
+### 🎵 Play/Pause Apple Music
+Apple Music の再生/停止をトグルします。再生中は停止、停止/一時停止中は再生します。
+
 ### 📄 URL to Markdown Converter
 クリップボードにコピーしたURLのWebページをMarkdown形式に変換します。LLMへの入力用に最適化された形式で出力します。
 
