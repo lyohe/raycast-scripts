@@ -46,6 +46,9 @@ Apple Music の再生/停止をトグルします。再生中は停止、停止/
 ### 📄 URL to Markdown Converter
 クリップボードにコピーしたURLのWebページをMarkdown形式に変換します。LLMへの入力用に最適化された形式で出力します。
 
+### 🌐 Get External IPv4
+`https://api.ipify.org`から実行マシンのexternal IPv4を取得してクリップボードに出力します。
+
 ### 🧼 URL Purifier
 長いURLのトラッキングパラメータを除去してクリーンなリンクに変換します。URLは引数またはクリップボードから読み込み、変換結果をクリップボードに出力します。
 
