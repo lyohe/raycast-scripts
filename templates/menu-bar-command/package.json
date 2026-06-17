@@ -1,0 +1,36 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "menu-bar-command-template",
+  "title": "Menu Bar Command Template",
+  "description": "Template for a disabled-by-default Raycast menu bar command with a submenu.",
+  "icon": "⚡",
+  "author": "lyohe",
+  "license": "MIT",
+  "platforms": ["macOS"],
+  "categories": ["Developer Tools"],
+  "commands": [
+    {
+      "name": "status-bar-menu-template",
+      "title": "Status Bar Menu Template",
+      "description": "Shows a template menu in the macOS menu bar.",
+      "mode": "menu-bar",
+      "disabledByDefault": true
+    }
+  ],
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  },
+  "dependencies": {
+    "@raycast/api": "latest"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "latest",
+    "@types/node": "latest",
+    "eslint": "latest",
+    "prettier": "latest",
+    "typescript": "latest"
+  }
+}
