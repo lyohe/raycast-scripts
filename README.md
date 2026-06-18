@@ -17,13 +17,13 @@ Raycast の Settings から Script を格納するディレクトリとして `.
 
 ![Image](https://github.com/user-attachments/assets/8dea0819-7ec4-4639-896f-25cc349bf65c)
 
-## テンプレート
+## Raycast Extensions
 
-### Menu Bar Command Template
+### Garbage Menu
 
-`templates/menu-bar-command` に、macOS のメニューバーへアイコン付きカスタムメニューを表示する Raycast Extension API 用テンプレートがあります。
+`extensions/garbage-menu` に、選択した日のごみ収集予定を macOS のメニューバーへ表示する Raycast Extension API 用カスタムメニューがあります。既定の表示対象は明日です。
 
-このテンプレートは `scripts/` 配下に置いていないため普段は読み込まれません。拡張として動かす場合もコマンドは `disabledByDefault: true` でデフォルトオフです。動作確認時だけ `templates/menu-bar-command` で `npm install && npm run dev` を実行し、Raycast Settings > Extensions で `Status Bar Menu Template` 行の `Enabled` チェックボックスをオンにしてから `Activate` してください。
+このカスタムメニューは `scripts/` 配下に置いていないため普段は読み込まれません。拡張として動かす場合もコマンドは `disabledByDefault: true` でデフォルトオフです。動作確認時だけ `extensions/garbage-menu` で `npm install && npm run dev` を実行し、Raycast Settings > Extensions で `Tomorrow Garbage` 行の `Enabled` チェックボックスをオンにしてから `Activate` してください。
 
 ## スクリプト一覧
 
