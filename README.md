@@ -17,6 +17,14 @@ Raycast の Settings から Script を格納するディレクトリとして `.
 
 ![Image](https://github.com/user-attachments/assets/8dea0819-7ec4-4639-896f-25cc349bf65c)
 
+## テンプレート
+
+### Menu Bar Command Template
+
+`templates/menu-bar-command` に、macOS のメニューバーへアイコン付きカスタムメニューを表示する Raycast Extension API 用テンプレートがあります。
+
+このテンプレートは `scripts/` 配下に置いていないため普段は読み込まれません。拡張として動かす場合もコマンドは `disabledByDefault: true` でデフォルトオフです。動作確認時だけ `templates/menu-bar-command` で `npm install && npm run dev` を実行し、Raycast Settings > Extensions で `Status Bar Menu Template` 行の `Enabled` チェックボックスをオンにしてから `Activate` してください。
+
 ## Raycast Extensions
 
 ### Garbage Menu

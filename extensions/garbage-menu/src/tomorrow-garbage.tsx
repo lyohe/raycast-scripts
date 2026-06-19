@@ -1,15 +1,4 @@
-import {
-  Clipboard,
-  Icon,
-  LaunchType,
-  LocalStorage,
-  MenuBarExtra,
-  Toast,
-  environment,
-  getPreferenceValues,
-  openCommandPreferences,
-  showToast,
-} from "@raycast/api";
+import { Icon, LaunchType, LocalStorage, MenuBarExtra, environment, getPreferenceValues } from "@raycast/api";
 import { existsSync } from "node:fs";
 import { useEffect, useState } from "react";
 
@@ -44,8 +33,6 @@ type MenuBarState = {
 type ScheduleState =
   | {
       status: "ready";
-      calendarPath: string;
-      source: "preference" | "auto";
       today: CalendarEntry | undefined;
       tomorrow: CalendarEntry | undefined;
       dayAfterTomorrow: CalendarEntry | undefined;
@@ -53,11 +40,9 @@ type ScheduleState =
     }
   | {
       status: "missing";
-      searchedPaths: string[];
     }
   | {
       status: "error";
-      calendarPath: string;
       message: string;
     };
 
@@ -79,21 +64,6 @@ export default function Command() {
       <MenuBarExtra icon={Icon.Trash} title="明日: 未設定" tooltip="Garbage calendar TSV is not configured">
         <MenuBarExtra.Section title="Calendar">
           <MenuBarExtra.Item title="Calendar TSV was not found" icon={Icon.Warning} />
-          <MenuBarExtra.Item
-            title="Open Preferences"
-            icon={Icon.Gear}
-            onAction={() => {
-              openCommandPreferences();
-            }}
-          />
-          <MenuBarExtra.Item
-            title="Copy Searched Paths"
-            icon={Icon.Clipboard}
-            onAction={async () => {
-              await Clipboard.copy(state.searchedPaths.join("\n"));
-              await showToast({ style: Toast.Style.Success, title: "Copied searched paths" });
-            }}
-          />
           <QuitMenuItem onQuit={menuBarState.quit} />
         </MenuBarExtra.Section>
       </MenuBarExtra>
@@ -105,22 +75,6 @@ export default function Command() {
       <MenuBarExtra icon={Icon.Trash} title="明日: エラー" tooltip={state.message}>
         <MenuBarExtra.Section title="Calendar Error">
           <MenuBarExtra.Item title={state.message} icon={Icon.Warning} />
-          <MenuBarExtra.Item
-            title="Copy Calendar Path"
-            subtitle={state.calendarPath}
-            icon={Icon.Clipboard}
-            onAction={async () => {
-              await Clipboard.copy(state.calendarPath);
-              await showToast({ style: Toast.Style.Success, title: "Copied calendar path" });
-            }}
-          />
-          <MenuBarExtra.Item
-            title="Open Preferences"
-            icon={Icon.Gear}
-            onAction={() => {
-              openCommandPreferences();
-            }}
-          />
           <QuitMenuItem onQuit={menuBarState.quit} />
         </MenuBarExtra.Section>
       </MenuBarExtra>
@@ -182,31 +136,6 @@ export default function Command() {
       </MenuBarExtra.Submenu>
 
       <MenuBarExtra.Section title="Actions">
-        <MenuBarExtra.Item
-          title="Copy Displayed Schedule"
-          icon={Icon.Clipboard}
-          onAction={async () => {
-            await Clipboard.copy(formatClipboardLine(selectedLabel, selectedEntry));
-            await showToast({ style: Toast.Style.Success, title: "Copied displayed schedule" });
-          }}
-        />
-        <MenuBarExtra.Item
-          title="Copy Calendar Path"
-          subtitle={state.calendarPath}
-          icon={Icon.Document}
-          onAction={async () => {
-            await Clipboard.copy(state.calendarPath);
-            await showToast({ style: Toast.Style.Success, title: "Copied calendar path" });
-          }}
-        />
-        <MenuBarExtra.Item
-          title="Open Preferences"
-          subtitle={state.source === "auto" ? "Using auto-detected TSV path" : "Using preference TSV path"}
-          icon={Icon.Gear}
-          onAction={() => {
-            openCommandPreferences();
-          }}
-        />
         <QuitMenuItem onQuit={menuBarState.quit} />
       </MenuBarExtra.Section>
     </MenuBarExtra>
@@ -271,14 +200,12 @@ function loadScheduleState(): ScheduleState {
   if (!resolvedPath.path) {
     return {
       status: "missing",
-      searchedPaths: resolvedPath.searchedPaths,
     };
   }
 
   if (!existsSync(resolvedPath.path)) {
     return {
       status: "error",
-      calendarPath: resolvedPath.path,
       message: "Calendar TSV does not exist",
     };
   }
@@ -289,8 +216,6 @@ function loadScheduleState(): ScheduleState {
 
     return {
       status: "ready",
-      calendarPath: resolvedPath.path,
-      source: resolvedPath.source === "preference" ? "preference" : "auto",
       today: entryForDate(entries, now),
       tomorrow: entryForDate(entries, addDays(now, 1)),
       dayAfterTomorrow: entryForDate(entries, addDays(now, 2)),
@@ -299,7 +224,6 @@ function loadScheduleState(): ScheduleState {
   } catch (error) {
     return {
       status: "error",
-      calendarPath: resolvedPath.path,
       message: error instanceof Error ? error.message : "Failed to read calendar TSV",
     };
   }
@@ -336,14 +260,6 @@ function ScheduleItem(props: {
       onAction={onAction}
     />
   );
-}
-
-function formatClipboardLine(label: string, entry: CalendarEntry | undefined): string {
-  if (!entry) {
-    return `${label}: 期間外`;
-  }
-
-  return `${label} ${formatDateLabel(entry)} ${formatItems(entry.items)}`;
 }
 
 function entryForDayOffset(
