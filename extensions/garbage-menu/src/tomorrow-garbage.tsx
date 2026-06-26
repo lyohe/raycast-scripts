@@ -230,7 +230,7 @@ function loadScheduleState(): ScheduleState {
 }
 
 function QuitMenuItem(props: { onQuit: () => Promise<void> }) {
-  return <MenuBarExtra.Item title="Quit Garbage Menu" icon={Icon.XMarkCircle} onAction={props.onQuit} />;
+  return <MenuBarExtra.Item title="Quit Garbage Menu" icon={Icon.Power} onAction={props.onQuit} />;
 }
 
 function ScheduleItem(props: {

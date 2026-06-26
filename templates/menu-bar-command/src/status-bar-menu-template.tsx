@@ -87,7 +87,7 @@ export default function Command() {
       <MenuBarExtra.Section title="Actions">
         <MenuBarExtra.Item
           title="Quit Template Menu"
-          icon={Icon.XMarkCircle}
+          icon={Icon.Power}
           onAction={async () => {
             await LocalStorage.setItem(hiddenStorageKey, "true");
             setIsHidden(true);
