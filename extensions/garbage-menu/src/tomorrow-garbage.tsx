@@ -21,7 +21,8 @@ type Preferences = {
 const hiddenStorageKey = "tomorrow-garbage.hidden";
 const selectedDayOffsetStorageKey = "tomorrow-garbage.selected-day-offset";
 const defaultSelectedDayOffset = 1;
-const maxSelectableDayOffset = 7;
+const upcomingDayCount = 14;
+const maxSelectableDayOffset = upcomingDayCount;
 
 type MenuBarState = {
   hidden: boolean;
@@ -119,7 +120,7 @@ export default function Command() {
         />
       </MenuBarExtra.Section>
 
-      <MenuBarExtra.Submenu title="Upcoming 7 Days" icon={Icon.List}>
+      <MenuBarExtra.Submenu title="Upcoming 14 Days" icon={Icon.List}>
         {state.upcoming.map((entry, index) => {
           const offset = index + 1;
           return (
@@ -219,7 +220,7 @@ function loadScheduleState(): ScheduleState {
       today: entryForDate(entries, now),
       tomorrow: entryForDate(entries, addDays(now, 1)),
       dayAfterTomorrow: entryForDate(entries, addDays(now, 2)),
-      upcoming: Array.from({ length: 7 }, (_, index) => entryForDate(entries, addDays(now, index + 1))),
+      upcoming: Array.from({ length: upcomingDayCount }, (_, index) => entryForDate(entries, addDays(now, index + 1))),
     };
   } catch (error) {
     return {
