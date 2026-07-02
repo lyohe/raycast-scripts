@@ -33,6 +33,12 @@ Raycast の Settings から Script を格納するディレクトリとして `.
 
 このカスタムメニューは `scripts/` 配下に置いていないため普段は読み込まれません。拡張として動かす場合もコマンドは `disabledByDefault: true` でデフォルトオフです。動作確認時だけ `extensions/garbage-menu` で `npm install && npm run dev` を実行し、Raycast Settings > Extensions で `Tomorrow Garbage` 行の `Enabled` チェックボックスをオンにしてから `Activate` してください。
 
+### Open Ports Menu
+
+`extensions/open-ports-menu` に、macOS の listening TCP port をメニューバーから確認する Raycast Extension API 用カスタムメニューがあります。port、process name、PID、listen address を表示し、localhost URL や `lsof` コマンドをコピーできます。プロセスを kill する操作は入れていません。
+
+このカスタムメニューは `scripts/` 配下に置いていないため普段は読み込まれません。拡張として動かす場合もコマンドは `disabledByDefault: true` でデフォルトオフです。動作確認時だけ `extensions/open-ports-menu` で `npm install && npm run dev` を実行し、Raycast Settings > Extensions で `Open Ports Menu` 行の `Enabled` チェックボックスをオンにしてから `Activate` してください。
+
 ## スクリプト一覧
 
 ### 📊 CSV/TSV to Markdown Table
