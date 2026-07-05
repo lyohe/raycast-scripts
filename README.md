@@ -71,6 +71,9 @@ Apple Music の再生/停止をトグルします。再生中は停止、停止/
 ### 📁 Open Downloads Folder
 ダウンロードフォルダを Finder で開きます。
 
+### 📋 Copy Finder Path
+Finder の最前面ウィンドウの現在位置のパスをクリップボードに出力します。Finder ウィンドウがない場合は Desktop のパスを出力します。
+
 ### 🧼 URL Purifier
 長いURLのトラッキングパラメータを除去してクリーンなリンクに変換します。URLは引数またはクリップボードから読み込み、変換結果をクリップボードに出力します。
 
