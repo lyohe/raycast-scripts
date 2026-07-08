@@ -56,6 +56,9 @@ YouTube動画IDのような11文字のランダムIDを生成します。使用�
 ### 🔒 SHA-256 Clipboard
 クリップボードのテキストをSHA-256でハッシュし、16進ダイジェストをクリップボードに出力します。
 
+### 🕒 Copy UNIX Timestamp
+現在時刻の UNIX timestamp を生成し、クリップボードに出力します。
+
 ### 🎵 Play/Pause Apple Music
 Apple Music の再生/停止をトグルします。再生中は停止、停止/一時停止中は再生します。
 
