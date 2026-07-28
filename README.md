@@ -27,6 +27,10 @@ Raycast の Settings から Script を格納するディレクトリとして `.
 
 ## Raycast Extensions
 
+### Apple Music Playlists
+
+`extensions/apple-music-playlists` に、Apple Music のローカル／非公開プレイリストを検索して再生するRaycast Extensionがあります。プレイリスト名を入力すると候補がインクリメンタルに絞り込まれ、選択すると再生します。
+
 ### Garbage Menu
 
 `extensions/garbage-menu` に、選択した日のごみ収集予定を macOS のメニューバーへ表示する Raycast Extension API 用カスタムメニューがあります。既定の表示対象は明日です。
