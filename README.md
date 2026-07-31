@@ -37,6 +37,10 @@ Raycast の Settings から Script を格納するディレクトリとして `.
 
 このカスタムメニューは `scripts/` 配下に置いていないため普段は読み込まれません。拡張として動かす場合もコマンドは `disabledByDefault: true` でデフォルトオフです。動作確認時だけ `extensions/garbage-menu` で `npm install && npm run dev` を実行し、Raycast Settings > Extensions で `Tomorrow Garbage` 行の `Enabled` チェックボックスをオンにしてから `Activate` してください。
 
+### Codex Sessions
+
+`extensions/codex-sessions` に、ローカルのCodexセッションを新しい順に一覧表示し、選択したセッションをCodexアプリで開くRaycast Extensionがあります。Codex CLIのApp Serverからセッション名、ワークスペース、状態、作成日時を取得します。
+
 ## スクリプト一覧
 
 ### 📊 CSV/TSV to Markdown Table
