@@ -1,0 +1,50 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "codex-sessions",
+  "title": "Codex Sessions",
+  "description": "List local Codex sessions and open them in the Codex app.",
+  "icon": "icon.png",
+  "author": "lyohe",
+  "license": "MIT",
+  "platforms": [
+    "macOS"
+  ],
+  "categories": [
+    "Developer Tools"
+  ],
+  "commands": [
+    {
+      "name": "list-sessions",
+      "title": "List Codex Sessions",
+      "description": "List local Codex sessions newest first and open them in Codex.",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "codexCliPath",
+          "title": "Codex CLI Path",
+          "description": "Absolute path to the Codex CLI executable.",
+          "type": "textfield",
+          "default": "/opt/homebrew/bin/codex",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  },
+  "dependencies": {
+    "@raycast/api": "latest",
+    "@raycast/utils": "latest"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "latest",
+    "@types/node": "latest",
+    "eslint": "latest",
+    "prettier": "latest",
+    "typescript": "latest"
+  }
+}
