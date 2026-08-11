@@ -67,6 +67,9 @@ YouTube動画IDのような11文字のランダムIDを生成します。使用�
 ### 🕒 Copy UNIX Timestamp
 現在時刻の UNIX timestamp を生成し、クリップボードに出力します。
 
+### 🔢 Copy Circled Numbers
+①から実行時に指定した終了番号（1〜50）までの丸数字を、1行に1つずつクリップボードに出力します。
+
 ### 🎵 Play/Pause Apple Music
 Apple Music の再生/停止をトグルします。再生中は停止、停止/一時停止中は再生します。
 
