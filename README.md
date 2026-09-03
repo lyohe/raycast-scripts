@@ -58,6 +58,9 @@ YouTube動画IDのような11文字のランダムIDを生成します。使用�
 ### 💬 Random Topic
 ランダムな会話トピックを選択します。`data/random-topic.txt`からトピックを読み込んでクリップボードに出力します。
 
+### 📚 Random Wikipedia Article
+英語版Wikipediaのランダムな記事をデフォルトブラウザで開きます。
+
 ### 🔐 SHA-1 Clipboard
 クリップボードのテキストをSHA-1でハッシュし、16進ダイジェストをクリップボードに出力します。
 
